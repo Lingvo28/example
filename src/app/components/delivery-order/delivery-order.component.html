@@ -1,0 +1,92 @@
+<form (ngSubmit)="submitForm()" #deliveryForm="ngForm">
+    <div>
+        <p class="h2" style="margin: 15px 0 30px 0">Delivery Information</p>
+
+        <label>
+            <input type="checkbox" name="fragile" class="form-check-input me-2" [(ngModel)]="isFragile"> Is Fragile
+        </label>
+        <div class="form-group my-2">
+            <label for="deliveryName">Delivery Name:</label>
+            <input type="text" id="deliveryName" name="deliveryName" class="form-control mt-2"
+                [(ngModel)]="deliveryName" required>
+        </div>
+
+        <div class="form-group my-2">
+            <label for="deliveryDescription">Delivery Description:</label>
+            <textarea id="deliveryDescription" name="deliveryDescription" class="form-control mt-2"
+                [(ngModel)]="deliveryDescription" required></textarea>
+        </div>
+
+        <div class="form-group my-2">
+            <label for="deliveryHeight">Height:</label>
+            <input type="number" id="deliveryHeight" name="deliveryHeight" class="form-control mt-2"
+                [(ngModel)]="deliveryHeight" required>
+        </div>
+
+        <div class="form-group my-2">
+            <label for="deliveryWeight">Weight:</label>
+            <input type="number" id="deliveryWeight" name="deliveryWeight" class="form-control mt-2"
+                [(ngModel)]="deliveryWeight" required>
+        </div>
+
+        <div class="form-group my-2">
+            <label for="deliveryLength">Length:</label>
+            <input type="number" id="deliveryLength" name="deliveryLength" class="form-control mt-2"
+                [(ngModel)]="deliveryLength" required>
+        </div>
+
+        <div class="form-group my-2">
+            <label for="deliveryWidth">Width:</label>
+            <input type="number" id="deliveryWidth" name="deliveryWidth" class="form-control mt-2"
+                [(ngModel)]="deliveryWidth" required>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <div class="form-group my-2 text-center ">
+                <label for="startLocation">Start Location:</label>
+                <label class="form-control my-2 mb-4" style="min-height: 38px;">{{startLocation}}</label>
+                <google-map [options]="gMapsOptions" (mapClick)="addStartMarker($event)">
+                    <map-marker [position]="startMarkerPosition" [options]="markerOptions"></map-marker>
+                </google-map>
+            </div>
+
+            <i class="fa fa-arrow-right fa-fade my-auto" style="color: #2a2b2c; font-size: 5rem;"></i>
+
+            <div class="form-group my-2 text-center">
+                <label for="destinationLocation">Destination Location:</label>
+                <label class="form-control my-2 mb-4" style="min-height: 38px;">{{destinationLocation}}</label>
+                <google-map [options]="gMapsOptions" (mapClick)="addDestinationMarker($event)">
+                    <map-marker [position]="destinationMarkerPosition" [options]="markerOptions"></map-marker>
+                </google-map>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p class="h2" style="margin: 30px 0 30px 0">Personal Information</p>
+        <div class="d-flex justify-content-between">
+            <div class="form-group flex-fill mr-2">
+                <label for="deliveryName">Name:</label>
+                <input type="text" id="deliveryName" name="deliveryName" class="form-control mt-2"
+                    [(ngModel)]="name" required>
+            </div>
+            <div class="form-group flex-fill mx-2">
+                <label for="deliveryName">Surname:</label>
+                <input type="text" id="deliveryName" name="deliveryName" class="form-control mt-2"
+                    [(ngModel)]="surname" required>
+            </div>
+            <div class="form-group flex-fill ml-2">
+                <label for="deliveryName">Phone:</label>
+                <input type="tel" placeholder="+380 68 608 6398" id="deliveryName" name="deliveryName" class="form-control mt-2"
+                    [(ngModel)]="phone" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-dark my-3 w-50"
+            [ngClass]="{'btn-secondary': !deliveryForm.form.valid}"
+            [disabled]="!deliveryForm.form.valid">Submit</button>
+    </div>
+
+</form>

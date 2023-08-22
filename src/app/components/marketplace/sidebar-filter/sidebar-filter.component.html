@@ -1,0 +1,55 @@
+<div >
+    <section class="border-bottom">
+        <section class=" m-3">
+            <div class="mb-4">
+                <label class="form-label" for="nameSearch">Name</label>
+                <input class="form-control" [ngModel]="name" (ngModelChange)="nameChanged($event)"/>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Brand</label>
+                <select 
+                    class="form-select" 
+                    aria-label="Brand Select"
+                    [ngModel]="selectedBrand"
+                    (ngModelChange)="brandChanged($event)"
+                >
+                    <option *ngFor="let brand of brands" [ngValue]="brand">
+                        {{ brand.Name }}
+                    </option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label class="form-label" for="priceInput">Price</label>
+                <div class="d-flex">
+                    <input class="form-control w-50 me-3" [ngModel]="minPrice" (ngModelChange)="minPriceChanged($event)"/> 
+                    – 
+                    <input class="ms-3 form-control w-50" [ngModel]="maxPrice" (ngModelChange)="maxPriceChanged($event)"/>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Category</label>
+                <select 
+                    class="form-select" 
+                    aria-label="Category Select"
+                    [ngModel]="selectedCategory"
+                    (ngModelChange)="categoryChanged($event)"
+                >
+                    <option *ngFor="let category of categories" [ngValue]="category">
+                        {{ category.Name }}
+                    </option>
+                </select>
+            </div>
+            <div class="mb-4" *ngIf="!!selectedCategory?.Characteristics && selectedCategory.Characteristics.length > 0">
+                <div class="my-2 " *ngFor="let char of selectedCategory.Characteristics">
+                    {{char.Name}}
+                    <input class="form-control" />
+                </div>
+            </div>
+        </section>
+    </section>
+    <section class=" d-flex justify-content-center m-3 pb-5">
+        <a>
+            <span class="text-nowrap" (click)="onApply()">Apply</span>
+        </a>
+    </section>
+</div>
